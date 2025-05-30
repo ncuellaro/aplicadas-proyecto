@@ -1,0 +1,341 @@
+body {
+	margin: 0;
+	font-family: 'Segoe UI', sans-serif;
+	background-color: #fceef3;
+	color: #333;
+}
+
+.container {
+	text-align: center;
+	padding: 50px;
+}
+
+h1 {
+	font-size: 2.5em;
+	color: #c92a5d;
+	margin-bottom: 20px;
+}
+
+.card-container {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-top: 40px;
+	flex-wrap: wrap;
+}
+
+.card {
+	background-color: #fff;
+	border: 2px solid #d6a5b7;
+	border-radius: 15px;
+	padding: 25px 35px;
+	width: 250px;
+	text-decoration: none;
+	color: #333;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+	color: #c92a5d;
+	margin-bottom: 10px;
+}
+
+.card p {
+	font-size: 0.95em;
+	color: #555;
+}
+
+body.tutoriales-body {
+	background: #fdf6f9;
+	font-family: 'Segoe UI', sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #333;
+}
+
+header {
+	text-align: center;
+	padding: 2rem;
+	background-color: #ffdce5;
+	color: #4e4e4e;
+}
+
+header h1 {
+	margin: 0;
+	font-size: 2.5rem;
+}
+
+header p {
+	font-size: 1.2rem;
+	margin-top: 0.5rem;
+}
+
+.cards-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2rem;
+	padding: 2rem;
+}
+
+.card {
+	background-color: #fff;
+	border: 2px solid #f2d1dc;
+	border-radius: 1rem;
+	width: 280px;
+	padding: 1.5rem;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+	color: #d96f8c;
+	margin-bottom: 0.5rem;
+}
+
+.card p {
+	font-size: 1rem;
+	color: #666;
+}
+
+.btn-leer-mas {
+	display: inline-block;
+	margin-top: 1rem;
+	padding: 0.5rem 1rem;
+	background-color: #fcb8cc;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 0.5rem;
+	font-weight: bold;
+	transition: background-color 0.3s ease;
+}
+
+.btn-leer-mas:hover {
+	background-color: #e58aaa;
+}
+
+.btn-volver {
+	display: inline-block;
+	margin: 2rem auto;
+	padding: 0.7rem 1.2rem;
+	background-color: #b5b5b5;
+	color: white;
+	text-decoration: none;
+	border-radius: 0.6rem;
+	text-align: center;
+	display: block;
+	width: fit-content;
+	font-weight: bold;
+}
+
+.tutoriales-body {
+	background-color: #fff4f7;
+	font-family: 'Segoe UI', sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #333;
+}
+
+.tutoriales-header {
+	text-align: center;
+	padding: 2rem;
+	background-color: #ffe3ec;
+	color: #4a4a4a;
+}
+
+.tutoriales-header h1 {
+	font-size: 2.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.tutoriales-grid {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+	flex-wrap: wrap;
+	padding: 2rem;
+}
+
+.tutorial-card {
+	background-color: #fff;
+	border: 2px solid #f2cdda;
+	border-radius: 1rem;
+	width: 280px;
+	padding: 1.5rem;
+	text-align: center;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tutorial-card:hover {
+	transform: scale(1.03);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tutorial-card .icono {
+	font-size: 2.5rem;
+	margin-bottom: 0.8rem;
+}
+
+.tutorial-card h2 {
+	color: #c92a5d;
+	margin-bottom: 0.5rem;
+}
+
+.tutorial-card p {
+	font-size: 0.95rem;
+	color: #666;
+	margin-bottom: 1.2rem;
+}
+
+.boton-tutorial {
+	display: inline-block;
+	padding: 0.6rem 1.2rem;
+	background-color: #fcb8cc;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 0.5rem;
+	font-weight: bold;
+	transition: background-color 0.3s ease;
+}
+
+.boton-tutorial:hover {
+	background-color: #e58aaa;
+}
+
+.btn-volver {
+	display: block;
+	margin: 2rem auto;
+	padding: 0.6rem 1.2rem;
+	background-color: #b5b5b5;
+	color: white;
+	text-decoration: none;
+	border-radius: 0.6rem;
+	font-weight: bold;
+	width: fit-content;
+}
+
+.upload-container {
+	max-width: 500px;
+	margin: 3rem auto;
+	background: #fff4f7;
+	border: 2px solid #f2cdda;
+	border-radius: 1rem;
+	padding: 2rem;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+	text-align: center;
+}
+
+input[type="file"] {
+	margin: 1rem 0;
+}
+
+.btn-primary {
+	background-color: #c92a5d;
+	color: white;
+	border: none;
+	padding: 0.7rem 1.5rem;
+	font-size: 1rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+	background-color: #a32248;
+}
+
+.algorithms-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 1rem;
+	flex-wrap: wrap;
+}
+
+.algorithms-buttons a {
+	text-align: center;
+}
+
+.algorithms-buttons button {
+	background-color: #fcb8cc;
+	border: none;
+	padding: 0.8rem 1.8rem;
+	border-radius: 0.5rem;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.algorithms-buttons button:hover {
+	background-color: #e58aaa;
+}
+
+.error-message {
+	color: #c92a5d;
+	margin-top: 0.5rem;
+	font-weight: bold;
+}
+
+.btn-primary {
+	background-color: #c92a5d;
+	color: white;
+	border: none;
+	padding: 0.7rem 1.5rem;
+	font-size: 1rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+}
+
+.btn-primary:hover {
+	background-color: #a32248;
+}
+
+.table-preview {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1.5rem;
+	font-size: 0.95rem;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.table-preview thead {
+	background-color: #fcb8cc;
+	color: white;
+}
+
+.table-preview th, .table-preview td {
+	padding: 0.75rem 1rem;
+	border: 1px solid #f2cdda;
+	text-align: center;
+}
+
+.table-preview tbody tr:nth-child(even) {
+	background-color: #fff0f5;
+}
+
+.table-preview tbody tr:hover {
+	background-color: #fde2eb;
+}
+
+.celda-predicha {
+  background-color: #fffacc;
+  font-weight: bold;
+  color: #333;
+}

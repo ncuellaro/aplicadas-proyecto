@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial: Árbol de Decisión</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<style>
+body.tutoriales-body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin: 0;
+	padding: 2rem;
+	background: #f4f8fb;
+	color: #333;
+}
+
+.tutoriales-header {
+	text-align: center;
+	background-color: #e0f7fa;
+	padding: 1.5rem;
+	border-radius: 10px;
+}
+
+.contenido-tutorial {
+	margin-top: 2rem;
+	background: #ffffff;
+	padding: 2rem;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+	padding-left: 1.5rem;
+}
+
+li {
+	margin-bottom: 0.5rem;
+}
+
+.ejemplo, .prediccion {
+	background-color: #f1f8e9;
+	padding: 1rem;
+	border-left: 5px solid #8bc34a;
+	margin: 1.5rem 0;
+	border-radius: 5px;
+}
+
+footer {
+	text-align: center;
+	margin-top: 3rem;
+}
+
+.btn-volver {
+	text-decoration: none;
+	background-color: #81d4fa;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	color: #004d40;
+	font-weight: bold;
+}
+</style>
+</head>
+<body class="tutoriales-body">
+	<header class="tutoriales-header">
+		<h1>🌳 Tutorial: Árbol de Decisión</h1>
+		<p>Cómo tomar decisiones basadas en datos usando reglas lógicas</p>
+	</header>
+
+	<main class="contenido-tutorial">
+		<h2>Escenario</h2>
+		<p>
+			Queremos decidir si una persona debe <strong>terminar</strong> una
+			relación, ser <strong>amigos con derechos</strong> o <strong>continuar</strong>,
+			según estas preguntas:
+		</p>
+		<ul>
+			<li>¿Es cariñoso?</li>
+			<li>¿Tiene dinero?</li>
+			<li>¿Genera confianza?</li>
+			<li>¿Es fiel?</li>
+		</ul>
+
+		<h2>Paso 1: Evaluar datos previos</h2>
+		<p>Ya tenemos registros de relaciones pasadas que muestran cómo
+			respondieron esas preguntas y qué decisión se tomó.</p>
+
+		<h2>Paso 2: Construcción del árbol</h2>
+		<p>
+			Analizamos los datos y encontramos que la mejor pregunta para iniciar
+			es <strong>¿Tiene dinero?</strong>. A partir de ahí:
+		</p>
+
+		<div class="ejemplo">
+			<p>
+				<strong>Si tiene dinero →</strong> Continuar
+			</p>
+			<p>
+				<strong>Si no tiene dinero y es fiel →</strong> Amigos con derechos
+			</p>
+			<p>
+				<strong>Si no tiene dinero y no es fiel →</strong> Terminar
+			</p>
+		</div>
+
+		<h2>Reglas del Árbol de Decisión</h2>
+		<ul>
+			<li>Si <strong>tiene dinero</strong>, entonces <strong>Continuar
+					la relación</strong>.
+			</li>
+			<li>Si <strong>no tiene dinero</strong> y <strong>es
+					fiel</strong>, entonces <strong>Amigos con derechos</strong>.
+			</li>
+			<li>Si <strong>no tiene dinero</strong> y <strong>no es
+					fiel</strong>, entonces <strong>Terminar</strong>.
+			</li>
+		</ul>
+
+		<h2>Uso del árbol para un nuevo caso</h2>
+		<div class="prediccion">
+			<p>Supongamos que la nueva persona:</p>
+			<ul>
+				<li>No es cariñoso</li>
+				<li>No tiene dinero</li>
+				<li>No genera confianza</li>
+				<li>Es fiel</li>
+			</ul>
+			<p>
+				<strong>Resultado: Amigos con derechos</strong>
+			</p>
+		</div>
+	</main>
+
+	<footer>
+		<a th:href="@{/tutoriales}" class="btn-volver">← Volver</a>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Clustering - Resultado</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<style>
+.celda-predicha {
+	background-color: #ffff99;
+	font-weight: bold;
+}
+
+.cluster-info {
+	background: #f0f0f0;
+	padding: 15px;
+	margin: 10px 0;
+	border-radius: 5px;
+}
+
+.parametros {
+	background: #e9e9e9;
+	padding: 15px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body class="tutoriales-body">
+	<header class="tutoriales-header">
+		<h1>📍 Algoritmo de Clustering</h1>
+		<p>Asignación basada en centros de cluster</p>
+	</header>
+
+	<main class="contenido-tutorial">
+		<!-- Datos originales -->
+		<div th:if="${datosCSV}">
+			<h2>Datos Originales</h2>
+			<div class="tabla-contenedor">
+				<table class="table-preview">
+					<thead>
+						<tr>
+							<th th:each="col : ${datosCSV[0]}" th:text="${col}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="fila, filaStat : ${datosCSV}"
+							th:if="${filaStat.index > 0}">
+							<td th:each="celda : ${fila}" th:text="${celda}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Información de clusters -->
+		<div th:if="${clusters}" class="cluster-section">
+			<h2>Información de Clusters</h2>
+			<div th:each="cluster : ${clusters}" class="cluster-info">
+				<h3>
+					Cluster <span th:text="${cluster.nombre}"></span>
+				</h3>
+				<p>Centros:</p>
+				<ul>
+					<li th:each="centro : ${cluster.centros}">Columna <span
+						th:text="${centro.key}"></span>: <strong th:text="${centro.value}"></strong>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Resultados con valores predichos -->
+		<div th:if="${datosPredichos}">
+			<h2>Resultados con Valores Predichos</h2>
+			<div class="tabla-contenedor">
+				<table class="table-preview">
+					<thead>
+						<tr>
+							<th th:each="titulo : ${titulos}" th:text="${titulo}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="fila, filaStat : ${datosPredichos}"
+							th:if="${filaStat.index > 0}">
+							<td th:each="celda : ${fila}" th:text="${celda}"
+								th:classappend="${celda != null and celda.endsWith('?')} ? 'celda-predicha' : ''">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Centros de clusters -->
+		<div th:if="${centros}">
+			<h3>Centros de Clusters</h3>
+			<div th:each="centro : ${centros}">
+				<h4>Cluster [[${centro.key}]]</h4>
+				<ul>
+					<tr th:each="col : ${columnas}">
+						<td th:text="${col}"></td>
+					</tr>
+
+				</ul>
+			</div>
+		</div>
+
+		<!-- Distancias a los clusters -->
+		<div th:if="${distancias}">
+			<h3>Distancias a los Clusters</h3>
+			<table class="table-preview">
+				<thead>
+					<tr>
+						<th>X1</th>
+						<th th:each="centro : ${centros}"
+							th:text="'Distancia Cluster ' + ${centro.key}"></th>
+						<th>Cluster Más Cercano</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="info : ${distancias}">
+						<td th:text="${info.valor}"></td>
+						<td th:each="centro : ${centros}"
+							th:text="${#numbers.formatDecimal(info.distancias[centro.key], 1, 2)}">
+						</td>
+						<td th:text="${info.masCercano}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Parámetros de clustering -->
+		<div th:if="${datosCSV}" class="parametros">
+			<h3>Parámetros del Algoritmo</h3>
+			<form th:action="@{/subir/prediccion/knn/ejecutar}" method="post">
+				<div>
+					<label>Columnas para clustering (X1, X2, etc.):</label><br>
+					<div th:each="col, colStat : ${datosCSV[0]}">
+						<input type="checkbox" th:id="'col_' + ${colStat.index}"
+							th:name="columnasClustering" th:value="${colStat.index}"
+							th:checked="${columnasClustering != null and columnasClustering.contains(colStat.index)}">
+						<label th:for="'col_' + ${colStat.index}"
+							th:text="${col} + ' (' + ${colStat.index} + ')'"></label>
+					</div>
+				</div>
+				<div style="text-align: center; margin-top: 20px;">
+					<button type="submit" class="btn-primary">Re-ejecutar
+						Clustering</button>
+				</div>
+			</form>
+		</div>
+	</main>
+
+	<footer>
+		<a th:href="@{/subir}" class="btn-volver">← Volver</a>
+	</footer>
+</body>
+</html>

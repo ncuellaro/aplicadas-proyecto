@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutoriales de Predicción</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="tutoriales-body">
+  <header class="tutoriales-header">
+    <h1>🧠 Tutoriales de Algoritmos</h1>
+    <p>Explora cada uno y descubre cómo funcionan</p>
+  </header>
+
+  <section class="tutoriales-grid">
+    <div class="tutorial-card">
+      <div class="icono">🌳</div>
+      <h2>Árboles de Decisión</h2>
+      <p>Divide los datos en ramas para tomar decisiones claras y lógicas.</p>
+      <a th:href="@{/tutoriales/arbol}" class="boton-tutorial">Ver Tutorial</a>
+    </div>
+
+    <div class="tutorial-card">
+      <div class="icono">📍</div>
+      <h2>KNN</h2>
+      <p>Encuentra los puntos más cercanos para hacer predicciones precisas.</p>
+      <a th:href="@{/tutoriales/knn}" class="boton-tutorial">Ver Tutorial</a>
+    </div>
+
+    <div class="tutorial-card">
+      <div class="icono">📈</div>
+      <h2>Regresión Lineal</h2>
+      <p>Predice valores usando la línea que mejor se ajusta a los datos.</p>
+      <a th:href="@{/tutoriales/regresion}" class="boton-tutorial">Ver Tutorial</a>
+    </div>
+  </section>
+
+  <footer>
+    <a th:href="@{/}" class="btn-volver">← Volver al Inicio</a>
+  </footer>
+</body>
+</html>

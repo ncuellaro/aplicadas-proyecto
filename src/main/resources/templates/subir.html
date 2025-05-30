@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Subir Archivo CSV - Predicción</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body class="tutoriales-body">
+	<header class="tutoriales-header">
+		<h1>📂 Subir Archivo CSV o XLSX</h1>
+		<p>Predice los datos faltantes usando un algoritmo</p>
+	</header>
+
+	<section class="upload-container">
+
+		<div th:unless="${archivoSubido}">
+			<form th:action="@{/subir/procesar}" method="post"
+				enctype="multipart/form-data" id="uploadForm">
+				<label for="fileInput">Selecciona tu archivo CSV o XLSX:</label><br />
+				<input type="file" id="fileInput" name="file" accept=".csv, .xlsx"
+					required /> <br />
+				<button type="submit" class="btn-primary">Subir Archivo</button>
+				<div id="fileError" class="error-message"
+					style="display: none; color: #c92a5d; margin-top: 10px;">Por
+					favor selecciona un archivo válido.</div>
+			</form>
+		</div>
+
+
+		<div th:if="${archivoSubido}" style="margin-top: 30px;">
+			<p style="display: inline-block; margin-right: 10px;">Selecciona
+				el algoritmo para predecir:</p>
+			<div class="algorithms-buttons"
+				style="display: inline-flex; gap: 10px; vertical-align: middle;">
+				<a th:href="@{/subir/prediccion/arbol}" class="btn-primary">🌳
+					Árbol de Decisión</a> <a th:href="@{/subir/prediccion/knn}"
+					class="btn-primary">📍 KNN</a> <a
+					th:href="@{/subir/prediccion/regresion}" class="btn-primary">📈
+					Regresión Lineal</a>
+			</div>
+		</div>
+
+
+
+	</section>
+
+	<footer>
+		<a th:href="@{/}" class="btn-volver">← Volver al Inicio</a>
+	</footer>
+
+	<script>
+        // Validación simple en cliente
+        const form = document.getElementById('uploadForm');
+        const fileInput = document.getElementById('fileInput');
+        const fileError = document.getElementById('fileError');
+
+        form.addEventListener('submit', e => {
+            fileError.style.display = 'none';
+            const file = fileInput.files[0];
+            if (!file) {
+                e.preventDefault();
+                fileError.textContent = 'Por favor selecciona un archivo CSV o Excel.';
+                fileError.style.display = 'block';
+                return;
+            }
+            if (!file.name.endsWith('.csv') && !file.name.endsWith('.xlsx')) {
+                e.preventDefault();
+                fileError.textContent = 'Solo se permiten archivos con extensión .csv o .xlsx';
+                fileError.style.display = 'block';
+                return;
+            }
+        });
+    </script>
+</body>
+</html>

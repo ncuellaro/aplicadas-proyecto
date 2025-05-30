@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>KNN (K-Vecinos Más Cercanos)</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 2rem;
+	background-color: #fdfdfd;
+	color: #333;
+}
+
+h1, h2, h3 {
+	color: #26547C;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin: 1rem 0;
+}
+
+th, td {
+	border: 1px solid #ccc;
+	padding: 0.5rem;
+	text-align: center;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+.resaltado {
+	background-color: #d0f0c0;
+}
+
+.prediccion {
+	background-color: #fdf6b2;
+}
+
+.bloque {
+	background-color: #ffffff;
+	border: 1px solid #ddd;
+	padding: 1rem;
+	margin: 1rem 0;
+	border-radius: 8px;
+}
+</style>
+</head>
+<body>
+	<header>
+		<h1>🔍 Algoritmo KNN (K-Vecinos Más Cercanos)</h1>
+		<p>Predice un valor faltante observando los ejemplos más
+			parecidos.</p>
+	</header>
+
+	<main>
+		<section class="bloque">
+			<h2>¿Qué es el algoritmo KNN?</h2>
+			<p>
+				KNN busca los <strong>"K" vecinos más cercanos</strong> a un dato
+				nuevo y predice su valor en función de esos vecinos. Se usa para
+				completar datos faltantes, clasificar, o predecir un valor numérico.
+			</p>
+		</section>
+
+		<section class="bloque">
+			<h2>Ejemplo aplicado: Predecir valor faltante en una tabla</h2>
+			<p>
+				Tenemos una columna <strong>X1</strong> (valor numérico) y una
+				columna <strong>Clase</strong> (+ o -). El objetivo es predecir los
+				valores faltantes usando los vecinos más cercanos.
+			</p>
+			<h3>Datos iniciales:</h3>
+			<table>
+				<tr>
+					<th>X1</th>
+					<th>Clase</th>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>+</td>
+				</tr>
+				<tr>
+					<td>2.2</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>1.8</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>+</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>+</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>+</td>
+				</tr>
+				<tr class="prediccion">
+					<td>?</td>
+					<td>-</td>
+				</tr>
+				<tr class="prediccion">
+					<td>?</td>
+					<td>+</td>
+				</tr>
+			</table>
+
+			<h3>Paso 1: Calcular centros de los grupos</h3>
+			<ul>
+				<li>Centro del grupo <strong>+</strong> = Promedio de (5, 4, 2,
+					5) = <strong>4.00</strong></li>
+				<li>Centro del grupo <strong>-</strong> = Promedio de (2.2,
+					1.8, 3) = <strong>2.33</strong></li>
+			</ul>
+
+			<h3>Paso 2: Calcular distancias</h3>
+			<p>Para cada dato, se mide la distancia a cada centro:</p>
+			<table>
+				<tr>
+					<th>X1</th>
+					<th>Clase</th>
+					<th>Distancia al centro +</th>
+					<th>Distancia al centro -</th>
+					<th>Predicción</th>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>+</td>
+					<td>1.00</td>
+					<td>2.67</td>
+					<td>+</td>
+				</tr>
+				<tr>
+					<td>2.2</td>
+					<td>-</td>
+					<td>1.80</td>
+					<td>0.13</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>1.8</td>
+					<td>-</td>
+					<td>2.20</td>
+					<td>0.53</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>+</td>
+					<td>0.00</td>
+					<td>1.67</td>
+					<td>+</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>+</td>
+					<td>2.00</td>
+					<td>0.33</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>-</td>
+					<td>1.00</td>
+					<td>0.67</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>+</td>
+					<td>1.00</td>
+					<td>2.67</td>
+					<td>+</td>
+				</tr>
+				<tr class="resaltado">
+					<td>?</td>
+					<td>-</td>
+					<td>2.67</td>
+					<td>0.25</td>
+					<td>-</td>
+				</tr>
+				<tr class="resaltado">
+					<td>?</td>
+					<td>+</td>
+					<td>1.67</td>
+					<td>0.75</td>
+					<td>-</td>
+				</tr>
+			</table>
+
+			<h3>Resultado</h3>
+			<p>La predicción se hace comparando las distancias: se asigna la
+				clase del centro más cercano.</p>
+		</section>
+
+		<section class="bloque">
+			<h2>¿Cómo interpretarlo?</h2>
+			<ul>
+				<li>El algoritmo no hace suposiciones, solo compara cercanía.</li>
+				<li>Funciona bien cuando los datos similares tienen resultados
+					similares.</li>
+				<li>El valor de <strong>K</strong> puede cambiar: aquí usamos
+					centros, pero también puede ser K vecinos reales.
+				</li>
+			</ul>
+		</section>
+		<style>
+body {
+	font-family: 'Segoe UI', sans-serif;
+	background-color: #f9f9f9;
+	color: #333;
+	margin: 20px;
+}
+
+h1, h2, h3 {
+	color: #4a7c59;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+th, td {
+	border: 1px solid #ccc;
+	padding: 10px;
+	text-align: center;
+}
+
+th {
+	background-color: #e0f7ea;
+}
+
+.highlight {
+	background-color: #fffde7;
+	font-weight: bold;
+}
+
+.btn-volver {
+	display: inline-block;
+	margin-top: 20px;
+	padding: 10px 15px;
+	background-color: #4a7c59;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.btn-volver:hover {
+	background-color: #3b6248;
+}
+</style>
+		</head>
+		<body>
+			<h1>👑 Algoritmo K-MODA</h1>
+			<p>
+				El algoritmo K-moda se utiliza cuando las variables son categóricas.
+				En lugar de promedios (como K-medias), usa las <strong>modas</strong>
+				(valores más frecuentes) para representar los centros de cada grupo.
+			</p>
+
+			<h2>Objetivo</h2>
+			<p>Agrupar registros en clusters y usar la moda de los valores
+				para determinar el centro de cada grupo. Luego, asignar nuevos datos
+				al grupo más cercano según la moda.</p>
+
+			<h2>Datos de ejemplo</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>X1</th>
+						<th>Clase</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>A</td>
+						<td>+</td>
+					</tr>
+					<tr>
+						<td>B</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>A</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>A</td>
+						<td>+</td>
+					</tr>
+					<tr>
+						<td>B</td>
+						<td>+</td>
+					</tr>
+					<tr>
+						<td>B</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>A</td>
+						<td>+</td>
+					</tr>
+					<tr class="highlight">
+						<td>?</td>
+						<td>-</td>
+					</tr>
+					<tr class="highlight">
+						<td>?</td>
+						<td>+</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>1. Determinar los centros de cada grupo (moda)</h2>
+			<p>Separamos los valores según su clase y buscamos el valor más
+				frecuente (la moda) para cada grupo:</p>
+
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th>Clase (+)</th>
+						<th>Clase (-)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Cantidad A</td>
+						<td>3</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>Cantidad B</td>
+						<td>1</td>
+						<td>2</td>
+					</tr>
+					<tr class="highlight">
+						<td>Moda (Centro)</td>
+						<td>A</td>
+						<td>B</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>2. Calcular la distancia para clasificar datos nuevos</h2>
+			<p>Usamos una distancia simple: si el valor coincide con la moda,
+				distancia 0; si no, distancia 1.</p>
+
+			<table>
+				<thead>
+					<tr>
+						<th>X1</th>
+						<th>Distancia a (+)</th>
+						<th>Distancia a (-)</th>
+						<th>Cluster más cercano</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>A</td>
+						<td>0</td>
+						<td>1</td>
+						<td>+</td>
+					</tr>
+					<tr>
+						<td>B</td>
+						<td>1</td>
+						<td>0</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>A</td>
+						<td>0</td>
+						<td>1</td>
+						<td>+</td>
+					</tr>
+					<tr>
+						<td>A</td>
+						<td>0</td>
+						<td>1</td>
+						<td>+</td>
+					</tr>
+					<tr>
+						<td>B</td>
+						<td>1</td>
+						<td>0</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>B</td>
+						<td>1</td>
+						<td>0</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td>A</td>
+						<td>0</td>
+						<td>1</td>
+						<td>+</td>
+					</tr>
+					<tr class="highlight">
+						<td>?</td>
+						<td>1</td>
+						<td>1</td>
+						<td>-</td>
+					</tr>
+					<tr class="highlight">
+						<td>?</td>
+						<td>0</td>
+						<td>2</td>
+						<td>+</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Resultado</h2>
+			<p>Los datos faltantes se asignan al grupo más cercano en función
+				de su coincidencia con la moda del grupo.</p>
+	</main>
+
+	<footer>
+		<a th:href="@{/tutoriales}" class="btn-volver">← Volver</a>
+	</footer>
+</body>
+</html>

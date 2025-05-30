@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>📊 Tutorial de Regresión Lineal Múltiple</title>
+<style>
+body.tutoriales-body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin: 0;
+	padding: 2rem;
+	background: #f7f9fc;
+	color: #333;
+}
+
+.tutoriales-header {
+	text-align: center;
+	background-color: #d6eaff;
+	padding: 1.5rem;
+	border-radius: 10px;
+}
+
+.contenido-tutorial {
+	margin-top: 2rem;
+	background: #ffffff;
+	padding: 2rem;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+	padding-left: 1.5rem;
+}
+
+li {
+	margin-bottom: 0.5rem;
+}
+
+.ejemplo, .prediccion {
+	background-color: #e8f5e9;
+	padding: 1rem;
+	border-left: 5px solid #43a047;
+	margin: 1.5rem 0;
+	border-radius: 5px;
+}
+
+footer {
+	text-align: center;
+	margin-top: 3rem;
+}
+
+.btn-volver {
+	text-decoration: none;
+	background-color: #ffcc80;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	color: #bf360c;
+	font-weight: bold;
+}
+</style>
+</head>
+<body class="tutoriales-body">
+	<header class="tutoriales-header">
+		<h1>📊 Regresión Lineal Múltiple</h1>
+		<p>Descubre cómo predecir valores con múltiples variables
+			independientes.</p>
+	</header>
+
+	<main class="contenido-tutorial">
+		<section>
+			<h2>Paso 1: Planteamiento del Problema</h2>
+			<p>
+				Supongamos que tenemos una empresa que desea predecir las <strong>ventas
+					mensuales</strong> basándose en dos factores:
+			</p>
+			<ul>
+				<li>Presupuesto publicitario en redes sociales (<b>x₁</b>).
+				</li>
+				<li>Presupuesto publicitario en televisión (<b>x₂</b>).
+				</li>
+			</ul>
+			<p>
+				Con los datos de meses anteriores, queremos establecer la relación
+				entre estos factores y las ventas (<b>y</b>).
+			</p>
+		</section>
+
+		<section>
+			<h2>Paso 2: Recolección de Datos</h2>
+			<p>Los datos que hemos recolectado se presentan en la siguiente
+				tabla:</p>
+			<table border="1" cellpadding="10" cellspacing="0"
+				style="width: 100%; text-align: center;">
+				<thead style="background-color: #e3f2fd;">
+					<tr>
+						<th>Mes</th>
+						<th>Presupuesto en Redes Sociales (x₁)</th>
+						<th>Presupuesto en Televisión (x₂)</th>
+						<th>Ventas (y)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Enero</td>
+						<td>200</td>
+						<td>300</td>
+						<td>500</td>
+					</tr>
+					<tr>
+						<td>Febrero</td>
+						<td>250</td>
+						<td>350</td>
+						<td>600</td>
+					</tr>
+					<tr>
+						<td>Marzo</td>
+						<td>300</td>
+						<td>400</td>
+						<td>700</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section>
+			<h2>Paso 3: Modelo Matemático</h2>
+			<p>El modelo de regresión lineal múltiple que queremos ajustar
+				es:</p>
+			<pre>y = b₀ + b₁x₁ + b₂x₂</pre>
+			<p>Donde:</p>
+			<ul>
+				<li><b>b₀</b>: Intercepto.</li>
+				<li><b>b₁</b> y <b>b₂</b>: Coeficientes para las variables
+					independientes.</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Paso 4: Entrenamiento del Modelo</h2>
+			<p>
+				Usamos métodos como los <strong>mínimos cuadrados</strong> para
+				calcular los valores de <b>b₀</b>, <b>b₁</b> y <b>b₂</b>. En este
+				caso, obtenemos:
+			</p>
+			<div class="ejemplo">
+				<p>
+					<b>Ecuación ajustada:</b> y = 100 + 1.5x₁ + 2x₂
+				</p>
+			</div>
+		</section>
+
+		<section>
+			<h2>Paso 5: Predicción</h2>
+			<p>
+				Queremos predecir las ventas si el presupuesto en redes sociales es
+				<b>350</b> y en televisión es <b>450</b>. Sustituimos en la
+				ecuación:
+			</p>
+			<div class="prediccion">
+				<pre>y = 100 + 1.5(350) + 2(450)</pre>
+				<pre>y = 100 + 525 + 900 = 1525</pre>
+				<p>
+					<strong>Ventas estimadas:</strong> 1525 unidades.
+				</p>
+			</div>
+		</section>
+	</main>
+
+
+	<footer>
+		<a th:href="@{/tutoriales}" class="btn-volver">← Volver</a>
+	</footer>
+</body>
+</html>

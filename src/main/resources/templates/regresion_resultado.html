@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Regresión Lineal - Resultado</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="tutoriales-body">
+	<header class="tutoriales-header">
+		<h1>📈 Regresión Lineal</h1>
+		<p>Visualiza los datos que usarás con el algoritmo</p>
+	</header>
+
+	<main class="contenido-tutorial">
+		<div th:if="${datosCSV}">
+			<h2>Datos cargados</h2>
+			<div class="tabla-contenedor">
+				<table class="table-preview" border="1" cellpadding="5"
+					cellspacing="0" style="border-collapse: collapse;">
+					<thead>
+						<tr>
+							<th th:each="col, iterStat : ${datosCSV[0]}"
+								th:text="'Columna ' + ${iterStat.index + 1}">Columna</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="fila : ${datosCSV}">
+							<td th:each="celda : ${fila}" th:text="${celda}">Dato</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div th:if="${datosCSV}">
+			<form th:action="@{/subir/prediccion/regresion/ejecutar}"
+				method="post">
+				<div style="text-align: center; margin-top: 20px;">
+					<button type="submit" class="btn-primary">Ejecutar
+						Predicción Regresión Lineal</button>
+				</div>
+			</form>
+		</div>
+
+		<div th:if="${betas}" style="margin-top: 30px;">
+			<h2>Coeficientes de Regresión (Betas)</h2>
+			<table border="1" cellpadding="5" cellspacing="0"
+				style="border-collapse: collapse; margin: auto;">
+				<thead>
+					<tr>
+						<th>Coeficiente</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Intercepto (Beta0)</td>
+						<td
+							th:text="${#numbers.formatDecimal(betas[0], 1, 'COMMA', 4, 'POINT')}"></td>
+					</tr>
+					<tr>
+						<td>Beta1</td>
+						<td
+							th:text="${#numbers.formatDecimal(betas[1], 1, 'COMMA', 4, 'POINT')}"></td>
+					</tr>
+					<tr>
+						<td>Beta2</td>
+						<td
+							th:text="${#numbers.formatDecimal(betas[2], 1, 'COMMA', 4, 'POINT')}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		</div>
+	</main>
+
+	<footer>
+		<a th:href="@{/subir}" class="btn-volver">← Volver</a>
+	</footer>
+</body>
+</html>

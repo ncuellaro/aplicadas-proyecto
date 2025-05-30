@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Datos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenid@</h1>
+        <p>Selecciona una opción para continuar:</p>
+
+        <div class="card-container">
+            <a th:href="@{/tutoriales}" class="card">
+                <h2>Tutoriales</h2>
+                <p>Conoce los algoritmos de predicción</p>
+            </a>
+
+            <a th:href="@{/subir}" class="card">
+                <h2>Subir Archivo CSV</h2>
+                <p>Predice los datos faltantes</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

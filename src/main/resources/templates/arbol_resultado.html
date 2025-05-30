@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>KNN - Resultado</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="tutoriales-body">
+  <header class="tutoriales-header">
+    <h1>🌳 Árboles de Decisión</h1>
+    <p>Visualiza los datos que usarás con el algoritmo</p>
+  </header>
+
+  <main class="contenido-tutorial">
+    <div th:if="${datosCSV}">
+      <h2>Datos cargados</h2>
+      <div class="tabla-contenedor">
+        <table class="table-preview">
+          <thead>
+            <tr>
+              <th th:each="col : ${datosCSV[0]}" th:text="${col}">Columna</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="fila, filaStat : ${datosCSV}" th:if="${filaStat.index > 0}">
+              <td th:each="celda : ${fila}" th:text="${celda}">Dato</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Botón para ejecutar la predicción -->
+		<div th:if="${datosCSV}">
+			<form th:action="@{/subir/prediccion/arbol/ejecutar}" method="post">
+				<div style="text-align: center; margin-top: 20px;">
+					<button type="submit" class="btn-primary">Ejecutar
+						Predicción Árbol de decisión</button>
+				</div>
+			</form>
+		</div>
+
+		<!-- Tabla con resultados predichos -->
+		<div th:if="${datosPredichos}" style="margin-top: 30px;">
+			<h2>Resultados de la Predicción</h2>
+			<div class="tabla-contenedor">
+				<table class="table-preview">
+					<thead>
+						<tr>
+							<th th:each="col : ${datosPredichos[0]}" th:text="${col}">Columna</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="fila, filaStat : ${datosPredichos}"
+							th:if="${filaStat.index > 0}">
+							<td th:each="celda, celdaStat : ${fila}" th:text="${celda}"
+								th:classappend="${celdasPredichas[filaStat.index][celdaStat.index]} ? 'celda-predicha' : ''">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</main>
+
+	<footer>
+		<a th:href="@{/subir}" class="btn-volver">← Volver</a>
+	</footer>
+</body>
+</html>
