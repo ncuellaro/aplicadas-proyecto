@@ -1,14 +1,13 @@
-# Usamos una imagen oficial de Java 17 con OpenJDK
-FROM openjdk:21-slim
-
-# Carpeta donde se copiará el jar
+# Stage 1: Build the project
+FROM maven:3.9.1-eclipse-temurin-21 as build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copia el jar construido (ajusta el nombre si es diferente)
-COPY target/*.jar app.jar
-
-# Expone el puerto en el que corre Spring Boot (por defecto 8080)
+# Stage 2: Run the app
+FROM openjdk:21-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 9095
-
-# Comando para ejecutar la app
 ENTRYPOINT ["java", "-jar", "app.jar"]
