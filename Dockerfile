@@ -1,13 +1,20 @@
-# Stage 1: Build the project
-FROM maven:3.9.1-eclipse-temurin-21 as build
+# Etapa 1: Construcción del proyecto
+FROM maven:3.9.4-eclipse-temurin-21 AS build
+
 WORKDIR /app
+
 COPY pom.xml .
-COPY src ./src
+COPY src /app/src
+
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run the app
+# Etapa 2: Imagen final para ejecutar la aplicación
 FROM openjdk:21-slim
+
 WORKDIR /app
+
 COPY --from=build /app/target/*.jar app.jar
-EXPOSE 9095
+
+EXPOSE 8080
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
